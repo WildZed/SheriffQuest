@@ -27,10 +27,8 @@ COWBOYSIZE = 175               # How big the man is.
 
 class SheriffQuest( game.Game ):
     def __init__( self, viewPort ):
-        self.images = self.loadImages()
-
         # set up generic game one time set up
-        game.Game.__init__( self, 'Sheriff Quest', 'Sheriff Quest Icon.png', viewPort )
+        game.Game.__init__( self, 'Sheriff Quest', 'Sheriff Quest Icon', viewPort )
 
         # game one time setup
         self.setDrawOrder( 'Player' )
@@ -39,7 +37,7 @@ class SheriffQuest( game.Game ):
 
 
     def loadImages( self ):
-        images = game_map.ImageStore()
+        images = self.images
 
         # L_COWBOY_IMG = pygame.image.load('Cowboy Carl.png')
         # R_COWBOY_IMG = pygame.transform.flip(L_COWBOY_IMG, True, False)
@@ -57,8 +55,6 @@ class SheriffQuest( game.Game ):
         # images.load( 'money' )
         # images.load( 'shop', range( 1, 4 ) )
         # images.load( 'arrow', range( 1, 4 ) )
-
-        return images
 
 
     # Per game initialisation.
