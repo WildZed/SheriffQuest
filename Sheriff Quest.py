@@ -20,7 +20,7 @@ BACKGROUND_COLOUR = (231, 211, 114)
 MOVERATE = Vector( 17, 10 ) # How fast the player moves in the x and y direction.
 BOUNCERATE = 6              # How fast the player bounces (large is slower).
 BOUNCEHEIGHT = 10           # How high the player bounces.
-COWBOYSIZE = 175               # How big the man is.
+COWBOYSIZE = 120            # How big the man is.
 
 
 
@@ -121,7 +121,9 @@ class SheriffQuest( game.Game ):
         moveStyle.setMoveRate( MOVERATE )
         moveStyle.setBounceRates( BOUNCERATE, BOUNCEHEIGHT )
 
-        return Player( playerStartPos, moveStyle, size=COWBOYSIZE, ratio=1.0, imageL=images.Cowboy_CarlL, imageR=images.Cowboy_CarlR, imageUp=images.Cowboy_Carl_Forward, imageDown=images.Cowboy_Carl_Backward )
+        return Player( playerStartPos, moveStyle, size=COWBOYSIZE, ratio=1.0, positionStyle='centre',
+                       imageL=images.Cowboy_CarlL, imageR=images.Cowboy_CarlR,
+                       imageUp=images.Cowboy_Carl_Forward, imageDown=images.Cowboy_Carl_Backward )
 
 
     # Could move cursor description into a file and read from there.
@@ -254,7 +256,7 @@ class SheriffQuest( game.Game ):
 #     # set up variables for the start of a new game
 #
 #     # camera is the top left of where the camera view is
-#     camera = Point()
+#     camera = Point( 0, 0  )
 #
 #     thickarrow_strings = (               #sized 24x24
 #         "    XX                  ",
