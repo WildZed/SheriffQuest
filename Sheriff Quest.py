@@ -78,7 +78,7 @@ class SheriffQuest( game.Game ):
 
         gameMap.setImageStore( images )
 
-        gameMap.createScene( 'Dusty Dunes', BACKGROUND_COLOUR )
+        gameMap.createScene( 'Dusty Dunes', backGroundColour=BACKGROUND_COLOUR )
 
         # Create scene objects.
 
