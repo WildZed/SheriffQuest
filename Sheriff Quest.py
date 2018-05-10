@@ -34,6 +34,7 @@ class SheriffQuest( game.Game ):
         self.setDrawOrder( 'Player' )
         self.setCursor()
         viewPort.loadMusic( 'Gun.ogg' )
+        viewPort.setCameraMovementStyle( game_dynamics.KeyMovementStyle( moveRate=Vector( 20, 12 ) ) )
 
 
     def loadImages( self ):
@@ -121,7 +122,7 @@ class SheriffQuest( game.Game ):
         moveStyle.setMoveRate( MOVERATE )
         moveStyle.setBounceRates( BOUNCERATE, BOUNCEHEIGHT )
 
-        return Player( playerStartPos, moveStyle, size=COWBOYSIZE, ratio=1.0, positionStyle='centre',
+        return Player( playerStartPos, moveStyle, size=COWBOYSIZE, ratio=1.0,
                        imageL=images.Cowboy_CarlL, imageR=images.Cowboy_CarlR,
                        imageUp=images.Cowboy_Carl_Forward, imageDown=images.Cowboy_Carl_Backward )
 
@@ -166,37 +167,8 @@ class SheriffQuest( game.Game ):
         player = self.player
 
         if event.type == KEYDOWN:
-            # Check if the key moves the player in a given direction.
-            player.setMovement( key=event.key )
-
             if event.key == K_r and self.winMode:
                 self.running = False
-            # elif event.key is K_q:
-            #     # Releases the jumpscare if you press 'q'.
-            #     viewPort.playSound( "Jumpscare V2" )
-            #     monster = self.createMonster()
-            #     gameMap.addSprite( monster )
-        elif event.type == KEYUP:
-            # Check if the key stops the player in a given direction.
-            player.stopMovement( key=event.key )
-
-            # if event.key is K_q:
-            #     gameMap.deleteAllObjectsOfType( 'Monster' )
-            # elif event.key is K_i:
-            #     viewPort.resetCamera()
-            #     player.pushPos( Point( viewPort.halfWidth, viewPort.halfHeight ), offsetOldPos=Point( 0, 20 ) )
-            #     gameMap.changeScene( 'insideShop1' )
-            # elif event.key is K_o:
-            #     player.popPos()
-            #     gameMap.changeScene( 'shops' )
-        elif event.type == MOUSEBUTTONUP:
-            pass
-            # if None is self.dragPos:
-            #     arrow = gameMap.objectsOfType( 'Arrow' )[0]
-            #
-            #     # Does the click point collide with a colour that is not the background colour.
-            #     if viewPort.collisionOfPoint( self.clickPos, arrow ):
-            #         viewPort.playSound( 'Money Ping' )
 
 
     def updateState( self ):
@@ -208,10 +180,6 @@ class SheriffQuest( game.Game ):
         viewPort = self.viewPort
         gameMap = self.gameMap
         player = self.player
-
-        # Adjust camera if beyond the "camera slack".
-        playerCentre = Point( player.x + int( ( float( player.size ) + 0.5 ) / 2 ), player.y + int( ( float( player.size ) + 0.5 ) / 2 ) )
-        viewPort.adjustCamera( playerCentre )
 
 
     # Update the positions of all the map objects according to the camera and new positions.
