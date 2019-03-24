@@ -28,10 +28,10 @@ COWBOYSIZE = 120            # How big the man is.
 class SheriffQuest( game.Game ):
     def __init__( self, viewPort ):
         # set up generic game one time set up
-        game.Game.__init__( self, 'Sheriff Quest', 'Sheriff Quest Icon', viewPort )
+        super().__init__( 'Sheriff Quest', 'Sheriff Quest Icon', viewPort )
 
         # game one time setup
-        self.setDrawOrder( 'Player' )
+        # self.setDrawOrder( 'Player' )
         self.setCursor()
         viewPort.loadMusic( 'Gun.ogg' )
         viewPort.setCameraMovementStyle( game_dynamics.KeyMovementStyle( moveRate=Vector( 20, 12 ) ) )
