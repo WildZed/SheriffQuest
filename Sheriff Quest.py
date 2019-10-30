@@ -6,8 +6,8 @@ sys.path.append( '../GameEngine' )
 
 from geometry import *
 import viewport, game, game_map, game_dynamics
-from game_objects import *
-from game_constants import *
+import game_objects as go
+import game_constants as gc
 
 
 # Constants.
@@ -37,7 +37,7 @@ class SheriffQuest( game.Game ):
         viewPort.setCameraMovementStyle( game_dynamics.KeyMovementStyle( moveRate=Vector( 20, 12 ) ) )
 
 
-    def loadImages( self ):
+    def loadImages( self, useAlpha = True ):
         images = self.images
 
         # L_COWBOY_IMG = pygame.image.load('Cowboy Carl.png')
@@ -46,9 +46,9 @@ class SheriffQuest( game.Game ):
         # BWD_COWBOY_IMG = pygame.image.load('Cowboy Carl Backward.png')
 
         # Might need to define a new ImageStore style Left Forward Backward Right.
-        images.load( 'Cowboy Carl', 'RL' )
-        images.load( 'Cowboy Carl Forward' )
-        images.load( 'Cowboy Carl Backward' )
+        images.load( 'Cowboy Carl', 'RL', alpha=useAlpha )
+        images.load( 'Cowboy Carl Forward', alpha=useAlpha )
+        images.load( 'Cowboy Carl Backward', alpha=useAlpha )
         # images.load( 'LFBR', 'Cowboy Carl', 'Cowboy Carl Forward', 'Cowboy Carl Backward' )
         # images.load( 'bush' )
         # images.load( 'ingredients store' )
@@ -121,10 +121,9 @@ class SheriffQuest( game.Game ):
         moveStyle = game_dynamics.KeyMovementStyle( boundaryStyle=playerBounds )
         moveStyle.setMoveRate( MOVERATE )
         moveStyle.setBounceRates( BOUNCERATE, BOUNCEHEIGHT )
+        playerImages = go.ImageCollection( left=images.Cowboy_CarlL, right=images.Cowboy_CarlR, up=images.Cowboy_Carl_Forward, down=images.Cowboy_Carl_Backward )
 
-        return Player( playerStartPos, moveStyle, size=COWBOYSIZE, ratio=1.0,
-                       imageL=images.Cowboy_CarlL, imageR=images.Cowboy_CarlR,
-                       imageUp=images.Cowboy_Carl_Forward, imageDown=images.Cowboy_Carl_Backward )
+        return go.Player( playerStartPos, moveStyle, size=COWBOYSIZE, ratio=1.0, image=playerImages )
 
 
     # Could move cursor description into a file and read from there.
